@@ -1,0 +1,21 @@
+meta {
+  name: Postagem Post
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/postagens/6/postar
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "conteudo": "o professor Ivens é o melhor"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

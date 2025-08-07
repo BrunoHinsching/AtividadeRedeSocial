@@ -1,5 +1,6 @@
 package com.rede.social.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,10 @@ public class Postagem {
     private Integer id;
     private String conteudo;
     private LocalDateTime dataCriacao;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    private Usuario autor;
 
     @OneToMany(mappedBy = "postagem")
     private List<Curtida> curtidas = new ArrayList<>();
@@ -42,6 +47,14 @@ public class Postagem {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public Usuario getUser() {
+        return autor;
+    }
+
+    public void setUser(Usuario usuario) {
+        this.autor = usuario;
     }
 
     public List<Curtida> getCurtidas() {

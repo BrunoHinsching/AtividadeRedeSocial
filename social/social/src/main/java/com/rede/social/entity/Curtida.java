@@ -10,7 +10,7 @@ public class Curtida {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Usuario usuario;
+    private Usuario user;
 
     @ManyToOne
     @JoinColumn(name = "postagem_id")
@@ -25,11 +25,11 @@ public class Curtida {
     }
 
     public Usuario getUser() {
-        return usuario;
+        return user;
     }
 
     public void setUser(Usuario usuario) {
-        this.usuario = usuario;
+        this.user = usuario;
     }
 
     public Postagem getPostagem() {

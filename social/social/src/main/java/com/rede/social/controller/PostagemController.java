@@ -1,14 +1,16 @@
 package com.rede.social.controller;
 
 import com.rede.social.entity.Postagem;
+import com.rede.social.entity.Usuario;
 import com.rede.social.repository.PostagemRepository;
 import com.rede.social.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/postages")
+@RequestMapping("/postagens")
 public class PostagemController {
 
     private final PostagemRepository postagemRepository;
@@ -19,8 +21,13 @@ public class PostagemController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping
-    public Postagem criarPost(@RequestBody Postagem postagem) {
+    @PostMapping("/{idUsuario}/postar")
+    public Postagem criarPost(@PathVariable Integer idUsuario, @RequestBody Postagem postagem) {
+        Usuario autor = this.userRepository.findById(idUsuario).get();
+
+        postagem.setUser(autor);
+        postagem.setDataCriacao(LocalDateTime.now());
+
         this.postagemRepository.save(postagem);
         return postagem;
     }
@@ -37,6 +44,6 @@ public class PostagemController {
 
     @GetMapping("/usuarios/{idUsuario}/postagens")
     public List<Postagem> filtrarPostagens(@PathVariable Integer idUsuario) {
-        return this.postagemRepository.findByUserId(idUsuario);
+        return this.postagemRepository.findByAutorId(idUsuario);
     }
 }

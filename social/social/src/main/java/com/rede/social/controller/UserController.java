@@ -4,6 +4,7 @@ import com.rede.social.entity.Usuario;
 import com.rede.social.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,8 @@ public class UserController {
 
     @PostMapping
     public Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
+        usuario.setDataCadastro(LocalDate.now());
+
         this.userRepository.save(usuario);
         return usuario;
     }
@@ -48,6 +51,6 @@ public class UserController {
         Usuario usuario = this.userRepository.findById(idUsuario).get();
 
         this.userRepository.deleteById(idUsuario);
-        return usuario;
+        return null;
     }
 }

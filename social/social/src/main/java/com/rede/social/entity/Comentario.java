@@ -13,13 +13,13 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Usuario usuario;
+    private Usuario user;
 
     @ManyToOne
     @JoinColumn(name = "postagem_id")
     private Postagem postagem;
 
-    private LocalDateTime dataCricao;
+    private LocalDateTime dataCriacao;
 
     public Integer getId() {
         return id;
@@ -37,20 +37,20 @@ public class Comentario {
         this.texto = texto;
     }
 
-    public LocalDateTime getDataCricao() {
-        return dataCricao;
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setDataCricao(LocalDateTime dataCricao) {
-        this.dataCricao = dataCricao;
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public Usuario getUser() {
-        return usuario;
+        return user;
     }
 
     public void setUser(Usuario usuario) {
-        this.usuario = usuario;
+        this.user = usuario;
     }
 
     public Postagem getPostagem() {

@@ -6,6 +6,7 @@ import com.rede.social.repository.ComentarioRepository;
 import com.rede.social.repository.PostagemRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -24,6 +25,8 @@ public class ComentarioController {
     public Comentario comentar(@PathVariable Integer idPostagem, @RequestBody Comentario comentario) {
         Postagem postagem = this.postagemRepository.findById(idPostagem).get();
         List<Comentario> comentarios = postagem.getComentarios();
+
+        comentario.setDataCriacao(LocalDateTime.now());
 
         comentarios.add(comentario);
 
